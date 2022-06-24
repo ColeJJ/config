@@ -1,0 +1,5 @@
+require('plugins')
+require('settings')
+require('maps')
+require('lsp-config')
+require('cmp-config')
