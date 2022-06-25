@@ -1,5 +1,7 @@
 require('plugins')
 require('settings')
 require('maps')
-require('lsp-config')
+require('lsp')
 require('cmp-config')
+require('treesitter')
+require('telescope-config')
