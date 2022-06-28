@@ -34,16 +34,8 @@ o.si = true --Smart indent
 --- vim.g.vscode_disable_nvimtree_bg = true
 --- vim.cmd([[colorscheme vscode]])
 
--- Theme
--- true color
--- Use NeoSolarized
---o.termguicolors = true
---o.winblend = 0
---o.wildoptions = pum
---o.pumblend = 5
---o.background = dark
---require('colors.NeoSolarized')
-
+-- THEME
+-- vim cmd run vim in lua
 vim.cmd([[
 " true color
 if exists("&termguicolors") && exists("&winblend")
