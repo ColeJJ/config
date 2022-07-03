@@ -12,3 +12,9 @@ set -g theme_hostname always
 # aliases
 alias llpeco 'll | peco'
 alias gs 'git status'
+
+#functions
+function ide 
+  tmux split-window -v -p 35 
+  tmux split-window -h -p 35 
+end
