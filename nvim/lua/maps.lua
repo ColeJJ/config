@@ -18,7 +18,7 @@ map('n', '==', 'o<Esc>', options)
 map('n', 'ss', ':split<Return><C-w>w', options)
 map('n', 'sv', ':vsplit<Return><C-w>w', options)
 -- move windows
-map('n', '<space>', '<C-w>w', options)
+map('n', '<Tab>', '<C-w>w', options)
 map('n', 'sh', '<C-w>h', options)
 map('n', 'sk', '<C-w>k', options)
 map('n', 'sj', '<C-w>j', options)
@@ -44,3 +44,4 @@ map('n', '<C-k>', ':Lspsaga diagnostic_jump_prev<CR>', options)
 
 -- NVIM TREE
 map("n", "<leader>e", ":NvimTreeToggle<cr>", options)
+map("n", "q", ":bd<CR>:tabNext<CR>", options)

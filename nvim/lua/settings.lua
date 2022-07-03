@@ -23,7 +23,7 @@ o.tabstop = 2
 o.ai = true --Auto indent
 o.si = true --Smart indent
 
--- THEME
+-- THEME VSCODE
 -- For dark theme (neovim's default)
 --- vim.o.background = "dark"
 -- Enable transparent background
