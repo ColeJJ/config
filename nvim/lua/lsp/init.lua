@@ -54,6 +54,10 @@ nvim_lsp.sumneko_lua.setup {
   capabilities = capabilities
 }
 
+nvim_lsp.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 -- eslint and prettier
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
