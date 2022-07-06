@@ -16,5 +16,5 @@ alias gs 'git status'
 #functions
 function ide 
   tmux split-window -v -p 35 
-  tmux split-window -h -p 35 
+  tmux split-window -h -p 65 
 end
