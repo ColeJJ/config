@@ -42,6 +42,8 @@ end
 local capabilities = require('cmp_nvim_lsp').update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
+--Enable (broadcasting) snippet capability for completion
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- languages
 nvim_lsp.tsserver.setup {
@@ -58,6 +60,12 @@ nvim_lsp.tailwindcss.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
+
+nvim_lsp.html.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 -- eslint and prettier
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
