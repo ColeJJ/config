@@ -48,6 +48,7 @@ return require('packer').startup(function()
   use "hrsh7th/cmp-calc" -- calculation completions
   use "hrsh7th/cmp-cmdline" -- cmd line completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "windwp/nvim-autopairs" -- auto pairs (), {} etc.
 
   -- Snippets
   use "L3MON4D3/LuaSnip" -- snippet engine

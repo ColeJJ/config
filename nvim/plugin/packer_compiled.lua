@@ -109,6 +109,11 @@ _G.packer_plugins = {
     path = "/Users/tounland/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
     url = "https://github.com/glepnir/lspsaga.nvim"
   },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/Users/tounland/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/tounland/.local/share/nvim/site/pack/packer/start/nvim-cmp",
