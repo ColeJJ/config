@@ -18,8 +18,6 @@ o.smarttab = true
 o.tabstop = 4
 o.softtabstop = 4
 o.shiftwidth = 4
-o.shiftwidth = 2
-o.tabstop = 2
 o.ai = true --Auto indent
 o.si = true --Smart indent
 
