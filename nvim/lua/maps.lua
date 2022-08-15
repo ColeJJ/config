@@ -13,6 +13,9 @@ local options = { noremap = true, silent = true }
 -- new line in normal mode
 map('n', '==', 'o<Esc>', options)
 
+-- remove search
+map('n', '<Space>', ':noh<CR>', options)
+
 -- WINDOWS
 -- split windows
 map('n', 'ss', ':split<Return><C-w>w', options)
@@ -25,7 +28,7 @@ map('n', 'sj', '<C-w>j', options)
 map('n', 'sl', '<C-w>l', options)
 
 -- TELESCOPE
-map('n', ';f', '<cmd>Telescope find_files<cr>', options)
+map('n', 'ff', '<cmd>Telescope find_files<cr>', options)
 map('n', ';r', '<cmd>Telescope live_grep<cr>', options)
 map('n', '\\', '<cmd>Telescope buffers<cr>', options)
 map('n', ';;', '<cmd>Telescope help_tags<cr>', options)
