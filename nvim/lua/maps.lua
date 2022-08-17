@@ -29,7 +29,7 @@ map('n', 'sl', '<C-w>l', options)
 
 -- TELESCOPE
 map('n', 'ff', '<cmd>Telescope find_files<cr>', options)
-map('n', ';r', '<cmd>Telescope live_grep<cr>', options)
+map('n', '<Space>f', '<cmd>Telescope live_grep<cr>', options)
 map('n', '\\', '<cmd>Telescope buffers<cr>', options)
 map('n', ';;', '<cmd>Telescope help_tags<cr>', options)
 
