@@ -23,7 +23,7 @@ return require('packer').startup(function()
     use 'williamboman/nvim-lsp-installer'
     use {
         'glepnir/lspsaga.nvim',
-        branch = 'main'
+        branch = 'version_2.2',
     }
 
     -- treesitter
