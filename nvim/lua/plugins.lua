@@ -18,6 +18,14 @@ return require('packer').startup(function()
     -- Theme
     use 'Mofiqul/vscode.nvim'
 
+    -- status line
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {
+            'kyazdani42/nvim-web-devicons', opt = true
+        }
+    }
+
     -- LSP Config
     use 'neovim/nvim-lspconfig'
     use 'williamboman/nvim-lsp-installer'
