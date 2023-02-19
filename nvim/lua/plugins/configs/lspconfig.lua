@@ -64,4 +64,29 @@ lspconfig.lua_ls.setup {
   },
 }
 
+lspconfig.tsserver.setup{
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+}
+
+lspconfig.html.setup{
+  on_attach = M.on_attach,
+  capabilities = M.capabilities
+}
+
+lspconfig.angularls.setup{
+  on_attach = M.on_attach,
+  capabilities = M.capabilities
+}
+
+lspconfig.emmet_ls.setup{
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+  filetype = { "html", "css", "javascript", "typescript"}
+}
+
+lspconfig.eslint.setup{
+  on_attach = M.on_attach,
+  capabilities = M.capabilities
+}
 return M
