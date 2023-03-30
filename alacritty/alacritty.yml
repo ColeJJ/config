@@ -3,7 +3,7 @@ scrolling:
     history: 10000
     multiplier: 10
 window:
-  opacity: 0.9 
+  opacity: 0.95 
   padding:
     x: 0
     y: 0
@@ -34,7 +34,13 @@ colors:
   # Default colors
   primary:
     background: '0x1a1b26'
+    # background: '#000000' # black
     foreground: '0xc0caf5'
+    # foreground: '#e1f4e9'
+
+  search:
+    foreground: '#e1f4e9'
+    background: '#e1f4e9'
 
   # Normal colors
   normal:
@@ -65,3 +71,5 @@ colors:
 cursor:
   style: Block
   unfocused_hollow: true
+
+alt_send_esc: false
