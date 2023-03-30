@@ -24,6 +24,14 @@ return require('packer').startup(function(use)
   use ('mbbill/undotree')
   -- git 
   use ('tpope/vim-fugitive')
+  -- autopairs
+  use ('jiangmiao/auto-pairs')
+  -- autopairs for html
+  use ('alvan/vim-closetag')
+
+  -- prettier and null ls
+  use('jose-elias-alvarez/null-ls.nvim')
+  use('MunifTanjim/prettier.nvim')
 
   -- lsp
   use {
