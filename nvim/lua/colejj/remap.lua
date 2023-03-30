@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
 -- while in normal mode "n" and pressing leader pv it will execute the command vim.cmd.Ex
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>t", vim.cmd.Ex)
 
 -- move lines above or down in v mode 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
