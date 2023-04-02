@@ -13,9 +13,16 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use({ 'rose-pine/neovim', as = 'rose-pine' })
 
-  vim.cmd('colorscheme rose-pine')
+ -- THEMES
+
+  -- Aquarium
+  --  use({
+  --    'frenzyexists/aquarium-vim'
+  --  })
+
+  -- tundra theme
+  use 'sam4llis/nvim-tundra'
 
   use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   -- local windows switching

@@ -154,6 +154,11 @@ _G.packer_plugins = {
     path = "/Users/tounland/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-tundra"] = {
+    loaded = true,
+    path = "/Users/tounland/.local/share/nvim/site/pack/packer/start/nvim-tundra",
+    url = "https://github.com/sam4llis/nvim-tundra"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/tounland/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -168,11 +173,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tounland/.local/share/nvim/site/pack/packer/start/prettier.nvim",
     url = "https://github.com/MunifTanjim/prettier.nvim"
-  },
-  ["rose-pine"] = {
-    loaded = true,
-    path = "/Users/tounland/.local/share/nvim/site/pack/packer/start/rose-pine",
-    url = "https://github.com/rose-pine/neovim"
   },
   ["telescope.nvim"] = {
     loaded = true,
