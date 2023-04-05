@@ -35,6 +35,13 @@ return require('packer').startup(function(use)
   use ('jiangmiao/auto-pairs')
   -- autopairs for html
   use ('alvan/vim-closetag')
+  -- commenting
+  use {
+      'numToStr/Comment.nvim',
+      config = function()
+          require('Comment').setup()
+      end
+  }
 
   -- prettier and null ls
   use('jose-elias-alvarez/null-ls.nvim')
