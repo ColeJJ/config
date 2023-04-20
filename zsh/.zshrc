@@ -18,7 +18,7 @@ plugins=(
   z
 )
 
-# sourcing oh my zsh
+# sourcing oh my zsh (afer settings plugins etc!)
 source $ZSH/oh-my-zsh.sh
 
 alias ga='git add'

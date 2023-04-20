@@ -69,5 +69,12 @@ return require('packer').startup(function(use)
     {'L3MON4D3/LuaSnip'},             -- Required
     {'rafamadriz/friendly-snippets'}, -- Optional
   }
+
 }
+
+  -- go lang 
+  use ('fatih/vim-go',{ run = ':GoUpdateBinaries' })
+
+  -- java 
+  use 'mfussenegger/nvim-jdtls'
 end)
