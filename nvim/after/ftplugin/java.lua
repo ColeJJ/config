@@ -27,8 +27,8 @@ end
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local HOME = os.getenv "HOME"
--- TODO: hier den workspace folder ggf aendern
-local workspace_dir = HOME .. "/ghq/java_workspace/neovim_ws/" ..project_name
+-- TODO: hier den workleader folder ggf aendern
+local workspace_dir = HOME .. "/ghq/java_workspace/neovim_ws/" .. project_name
 os.execute("mkdir " .. workspace_dir)
 
 -- Main Config
@@ -54,7 +54,7 @@ local config = {
   },
 
   -- This is the default if not provided, you can remove it. Or adjust as needed.
-  root_dir = root_dir, 
+  root_dir = root_dir,
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
@@ -132,45 +132,35 @@ local config = {
   },
 }
 
-config['on_attach'] = function(bufnr)
+function OnAttach(bufnr)
   -- java bindings
-  jdtls.add_comments()
+  jdtls.setup.add_commands()
   local opts = { noremap=true, silent=true }
       -- my bindings
-      vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-      vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-      vim.keymap.set("n", "gh", function() vim.lsp.buf.hover() end, opts)
-      vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-      vim.keymap.set("n", "gf", function() vim.lsp.buf.references() end, opts)
-      vim.keymap.set("n", "gn", function() vim.lsp.buf.rename() end, opts)
-      vim.keymap.set("n", "<space>D", function() vim.lsp.buf.type_definition() end, opts)
-      vim.keymap.set("n", "<space>e", function() vim.lsp.diagnostic.show_line_diagnostics() end, opts)
-      vim.keymap.set("n", "[d", function() vim.lsp.diagnostic.goto_prev() end, opts)
-      vim.keymap.set("n", "]d", function() vim.lsp.diagnostic.goto_next() end, opts)
+      -- vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
+      -- vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+      -- vim.keymap.set("n", "gh", function() vim.lsp.buf.hover() end, opts)
+      -- vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
+      -- vim.keymap.set("n", "gf", function() vim.lsp.buf.references() end, opts)
+      -- vim.keymap.set("n", "gn", function() vim.lsp.buf.rename() end, opts)
+      -- vim.keymap.set("n", "<leader>D", function() vim.lsp.buf.type_definition() end, opts)
+      -- vim.keymap.set("n", "<leader>e", function() vim.lsp.diagnostic.show_line_diagnostics() end, opts)
+      -- vim.keymap.set("n", "[d", function() vim.lsp.diagnostic.goto_prev() end, opts)
+      -- vim.keymap.set("n", "]d", function() vim.lsp.diagnostic.goto_next() end, opts)
 
       -- Java specific
-      vim.keymap.set("n", "<space>ji", jdtls.organize_imports(), opts)
-      vim.keymap.set("n", "<space>jt", jdtls.test_class(), opts)
-      vim.keymap.set("n", "<space>jn", jdtls.test_nearest_method(), opts)
-      vim.keymap.set("n", "<space>je", jdtls.extract_variable(true), opts)
-      vim.keymap.set("n", "<space>je", jdtls.extract_variable(), opts)
-      vim.keymap.set("n", "<space>jm", jdtls.extract_method(true), opts)
-
-  -- lsp signature
-  require "lsp_signature".on_attach({
-    bind = true, -- This is mandatory, otherwise border config won't get registered.
-    floating_window_above_cur_line = false,
-    padding = '',
-    handler_opts = {
-      border = "rounded"
-    }
-  }, bufnr)
-
+      vim.keymap.set("n", "<leader>or", function() require('jdtls').organize_imports() end, opts)
+      vim.keymap.set("n", "<leader>dt", function() jdtls.test_class() end, opts)
+      vim.keymap.set("n", "<leader>dn", function() jdtls.test_nearest_method() end, opts)
+      vim.keymap.set("n", "<leader>de", function() jdtls.extract_variable(true) end, opts)
+      vim.keymap.set("n", "<leader>de", function() jdtls.extract_variable() end, opts)
+      vim.keymap.set("n", "<leader>dm", function() jdtls.extract_method(true) end, opts)
+      -- vim.keymap.set("n", "", jdtls.super_implementation(), opts)
 end
 
 -- setting capabilities
 config['capabilities'] = {
-    workspace = {
+    workleader = {
         configuration = true
     },
     textDocument = {
@@ -192,4 +182,5 @@ config['init_options'] = {
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
+OnAttach()
 require('jdtls').start_or_attach(config)
