@@ -9,9 +9,10 @@ if not jdtls_ok then
   return
 end
 
--- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
+-- PATHES
+-- vim.fn.stdpath('data') = /Users/tounland/.local/share/nvim
 local jdtls_path = vim.fn.stdpath('data') .. "/mason/packages/jdtls"
-local path_to_lsp_server = jdtls_path .. "/config_mac"
+local path_to_config_server = jdtls_path .. "/config_mac"
 local path_to_plugins = jdtls_path .. "/plugins/"
 local path_to_jar = path_to_plugins .. "org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
 local lombok_path = path_to_plugins .. "lombok.jar"
@@ -26,6 +27,7 @@ end
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local HOME = os.getenv "HOME"
+-- TODO: hier den workspace folder ggf aendern
 local workspace_dir = HOME .. "/ghq/java_workspace/neovim_ws/" ..project_name
 os.execute("mkdir " .. workspace_dir)
 
@@ -47,13 +49,12 @@ local config = {
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
     '-jar', path_to_jar,
-    '-configuration', path_to_lsp_server,
+    '-configuration', path_to_config_server,
     '-data', workspace_dir,
   },
 
   -- This is the default if not provided, you can remove it. Or adjust as needed.
-  -- One dedicated LSP server & client will be started per unique root_dir
-  root_dir = root_dir,
+  root_dir = root_dir, 
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
@@ -71,10 +72,6 @@ local config = {
             name = "JavaSE-20",
             path = jvm_path .. jdk_20_path .. "/Contents/Home",
           }
-          -- {
-          --   name = "JavaSE-17",
-          --   path = "/Users/ivanermolaev/Library/Java/JavaVirtualMachines/temurin-17.0.4/Contents/Home",
-          -- }
         }
       },
       maven = {
@@ -134,14 +131,33 @@ local config = {
   flags = {
     allow_incremental_sync = true,
   },
-  init_options = {
-    bundles = {},
-  },
 }
 
-config['on_attach'] = function(client, bufnr)
-  -- require'keymaps'.map_java_keys(bufnr);
-  require'colejj.remap'.map_java_keys(bufnr);
+config['on_attach'] = function(bufnr)
+  -- java bindings
+  jdtls.add_comments()
+  local opts = { noremap=true, silent=true }
+      -- my bindings
+      vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
+      vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+      vim.keymap.set("n", "gh", function() vim.lsp.buf.hover() end, opts)
+      vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
+      vim.keymap.set("n", "gf", function() vim.lsp.buf.references() end, opts)
+      vim.keymap.set("n", "gn", function() vim.lsp.buf.rename() end, opts)
+      vim.keymap.set("n", "<space>D", function() vim.lsp.buf.type_definition() end, opts)
+      vim.keymap.set("n", "<space>e", function() vim.lsp.diagnostic.show_line_diagnostics() end, opts)
+      vim.keymap.set("n", "[d", function() vim.lsp.diagnostic.goto_prev() end, opts)
+      vim.keymap.set("n", "]d", function() vim.lsp.diagnostic.goto_next() end, opts)
+
+      -- Java specific
+      vim.keymap.set("n", "<space>ji", jdtls.organize_imports(), opts)
+      vim.keymap.set("n", "<space>jt", jdtls.test_class(), opts)
+      vim.keymap.set("n", "<space>jn", jdtls.test_nearest_method(), opts)
+      vim.keymap.set("n", "<space>je", jdtls.extract_variable(true), opts)
+      vim.keymap.set("n", "<space>je", jdtls.extract_variable(), opts)
+      vim.keymap.set("n", "<space>jm", jdtls.extract_method(true), opts)
+
+  -- lsp signature
   require "lsp_signature".on_attach({
     bind = true, -- This is mandatory, otherwise border config won't get registered.
     floating_window_above_cur_line = false,
@@ -150,7 +166,30 @@ config['on_attach'] = function(client, bufnr)
       border = "rounded"
     }
   }, bufnr)
+
 end
+
+-- setting capabilities
+config['capabilities'] = {
+    workspace = {
+        configuration = true
+    },
+    textDocument = {
+        completion = {
+            completionItem = {
+                snippetSupport = true
+            }
+        }
+    }
+}
+
+-- settings init_options 
+local extendedClientCapabilities = require('jdtls').extendedClientCapabilities;
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true;
+config['init_options'] = {
+    bundles = {},
+    extendedClientCapabilities = extendedClientCapabilities;
+}
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
