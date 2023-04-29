@@ -113,7 +113,6 @@ local config = {
         "org"
       },
     },
-    extendedClientCapabilities = extendedClientCapabilities,
     sources = {
       organizeImports = {
         starThreshold = 9999,
