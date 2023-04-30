@@ -15,9 +15,10 @@ local jdtls_path = vim.fn.stdpath('data') .. "/mason/packages/jdtls"
 local path_to_config_server = jdtls_path .. "/config_mac"
 local path_to_plugins = jdtls_path .. "/plugins/"
 local path_to_jar = path_to_plugins .. "org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
-local lombok_path = path_to_plugins .. "lombok.jar"
+local lombok_path = jdtls_path .. "/lombok.jar"
 local jvm_path = '/Library/Java/JavaVirtualMachines'
 local jdk_20_path = jvm_path .. '/jdk-20.jdk'
+-- local jdk_19_path = jvm_path .. '/jdk-19.jdk'
 
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
@@ -25,11 +26,33 @@ if root_dir == "" then
   return
 end
 
-local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+-- WORKSPACE WITH PROJECT 
+-- local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+-- local HOME = os.getenv "HOME"
+-- local workspace_dir = HOME .. "/ghq/java_workspace/neovim_ws/" .. project_name
+
+-- WORKSPACE WITHOUT PROJECT
 local HOME = os.getenv "HOME"
--- TODO: hier den workleader folder ggf aendern
-local workspace_dir = HOME .. "/ghq/java_workspace/neovim_ws/" .. project_name
-os.execute("mkdir " .. workspace_dir)
+local workspace_dir = HOME .. "/ghq/java_workspace/neovim_ws/"
+
+-- os.execute("mkdir " .. workspace_dir)
+
+local on_attach = function(client, bufnr)
+  -- java bindings
+  jdtls.setup.add_commands()
+  local opts = { noremap=true, silent=true, buffer=bufnr }
+      -- Java specific
+      vim.keymap.set("n", "<leader>or", function() jdtls.organize_imports() end, opts)
+      vim.keymap.set("n", "<leader>dt", function() jdtls.test_class() end, opts)
+      vim.keymap.set("n", "<leader>dn", function() jdtls.test_nearest_method() end, opts)
+      vim.keymap.set("n", "<leader>de", function() jdtls.extract_variable(true) end, opts)
+      vim.keymap.set("n", "<leader>de", function() jdtls.extract_variable() end, opts)
+      vim.keymap.set("n", "<leader>dm", function() jdtls.extract_method(true) end, opts)
+end
+
+-- setting capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Main Config
 local config = {
@@ -42,40 +65,58 @@ local config = {
     '-Declipse.product=org.eclipse.jdt.ls.core.product',
     '-Dlog.protocol=true',
     '-Dlog.level=ALL',
-    '-javaagent:' .. lombok_path,
     '-Xms1g',
     '--add-modules=ALL-SYSTEM',
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
+    '-javaagent:' .. lombok_path,
     '-jar', path_to_jar,
     '-configuration', path_to_config_server,
     '-data', workspace_dir,
   },
 
-  -- This is the default if not provided, you can remove it. Or adjust as needed.
   root_dir = root_dir,
+  on_attach = on_attach,
+  capabilities = capabilities,
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
   -- for a list of options
   settings = {
     java = {
-      home = jvm_path .. jdk_20_path .. '/Contents/Home/',
-      eclipse = {
-        downloadSources = true,
-      },
+      home = jvm_path .. jdk_20_path .. '/Contents/Home',
       configuration = {
         updateBuildConfiguration = "interactive",
         runtimes = {
           {
             name = "JavaSE-20",
-            path = jvm_path .. jdk_20_path .. "/Contents/Home",
+            path = jdk_20_path .. "/Contents/Home",
           }
+          -- {
+          --   name = "JAVASE-19",
+          --   path = jdk_19_path .. "/Contents/Home",
+          -- }
         }
+      },
+      import = {
+          maven = {
+              enabled =  true
+          },
+          gradle = {
+              enabled =  true
+          }
       },
       maven = {
         downloadSources = true,
+      },
+      eclipse = {
+        downloadSources = true,
+      },
+      jdt = {
+          ls = {
+              lombokSupport = true
+          }
       },
       implementationsCodeLens = {
         enabled = true,
@@ -93,83 +134,51 @@ local config = {
           profile = "GoogleStyle",
         },
       },
-
-    },
-    signatureHelp = { enabled = true },
-    completion = {
-      favoriteStaticMembers = {
-        "org.hamcrest.MatcherAssert.assertThat",
-        "org.hamcrest.Matchers.*",
-        "org.hamcrest.CoreMatchers.*",
-        "org.junit.jupiter.api.Assertions.*",
-        "java.util.Objects.requireNonNull",
-        "java.util.Objects.requireNonNullElse",
-        "org.mockito.Mockito.*",
+      saveActions = {
+          organizeImports = true
       },
-      importOrder = {
-        "java",
-        "javax",
-        "com",
-        "org"
+      signatureHelp = { enabled = true },
+      completion = {
+          favoriteStaticMembers = {
+              "org.hamcrest.MatcherAssert.assertThat",
+              "org.hamcrest.Matchers.*",
+              "org.hamcrest.CoreMatchers.*",
+              "org.junit.jupiter.api.Assertions.*",
+              "java.util.Objects.requireNonNull",
+              "java.util.Objects.requireNonNullElse",
+              "org.mockito.Mockito.*",
+          },
+          importOrder = {
+              "java",
+              "javax",
+              "com",
+              "org"
+          },
+          filteredTypes = {
+              "com.sun.*",
+              "io.micrometer.shaded.*",
+              "java.awt.*",
+              "jdk.*", "sun.*",
+          },
       },
-    },
-    sources = {
-      organizeImports = {
-        starThreshold = 9999,
-        staticStarThreshold = 9999,
+      sources = {
+          organizeImports = {
+              starThreshold = 9999,
+              staticStarThreshold = 9999,
+          },
       },
-    },
-    codeGeneration = {
-      toString = {
-        template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+      codeGeneration = {
+          toString = {
+              template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+          },
+          useBlocks = true,
       },
-      useBlocks = true,
     },
   },
 
   flags = {
     allow_incremental_sync = true,
   },
-}
-
-function OnAttach(bufnr)
-  -- java bindings
-  jdtls.setup.add_commands()
-  local opts = { noremap=true, silent=true }
-      -- my bindings
-      -- vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-      -- vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-      -- vim.keymap.set("n", "gh", function() vim.lsp.buf.hover() end, opts)
-      -- vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-      -- vim.keymap.set("n", "gf", function() vim.lsp.buf.references() end, opts)
-      -- vim.keymap.set("n", "gn", function() vim.lsp.buf.rename() end, opts)
-      -- vim.keymap.set("n", "<leader>D", function() vim.lsp.buf.type_definition() end, opts)
-      -- vim.keymap.set("n", "<leader>e", function() vim.lsp.diagnostic.show_line_diagnostics() end, opts)
-      -- vim.keymap.set("n", "[d", function() vim.lsp.diagnostic.goto_prev() end, opts)
-      -- vim.keymap.set("n", "]d", function() vim.lsp.diagnostic.goto_next() end, opts)
-
-      -- Java specific
-      vim.keymap.set("n", "<leader>or", function() require('jdtls').organize_imports() end, opts)
-      vim.keymap.set("n", "<leader>dt", function() jdtls.test_class() end, opts)
-      vim.keymap.set("n", "<leader>dn", function() jdtls.test_nearest_method() end, opts)
-      vim.keymap.set("n", "<leader>de", function() jdtls.extract_variable(true) end, opts)
-      vim.keymap.set("n", "<leader>de", function() jdtls.extract_variable() end, opts)
-      vim.keymap.set("n", "<leader>dm", function() jdtls.extract_method(true) end, opts)
-      -- vim.keymap.set("n", "", jdtls.super_implementation(), opts)
-end
-
--- setting capabilities
-config['capabilities'] = {
-    workleader = {
-        configuration = true
-    },
-    textDocument = {
-        completion = {
-            completionItem = {
-                snippetSupport = true
-            }
-        }
-    }
 }
 
 -- settings init_options 
@@ -182,5 +191,4 @@ config['init_options'] = {
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
-OnAttach()
 require('jdtls').start_or_attach(config)
