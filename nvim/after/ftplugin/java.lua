@@ -33,7 +33,7 @@ end
 
 -- WORKSPACE WITHOUT PROJECT
 local HOME = os.getenv "HOME"
-local workspace_dir = HOME .. "/ghq/java_workspace/neovim_ws/"
+local workspace_dir = HOME .. "/ghq/java_workspaces/neovim_ws/"
 
 -- os.execute("mkdir " .. workspace_dir)
 
