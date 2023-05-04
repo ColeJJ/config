@@ -14,16 +14,19 @@ return require('packer').startup(function(use)
   }
 
 
- -- THEMES
-
+  -- THEMES
   -- Aquarium
   --  use({
   --    'frenzyexists/aquarium-vim'
   --  })
 
   -- tundra theme
-  use 'sam4llis/nvim-tundra'
+  -- use 'sam4llis/nvim-tundra'
 
+  -- catpuccin theme
+  use { "catppuccin/nvim", name = "catppuccin" }
+
+  -- CODING
   use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   -- local windows switching
   use ('theprimeagen/harpoon')
