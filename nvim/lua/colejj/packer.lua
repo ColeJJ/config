@@ -7,24 +7,34 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  -- file and folder finder
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.1',
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use {
+      'junegunn/fzf.vim',
+      requires = { {'junegunn/fzf'} }
+  }
+  use 'nvim-telescope/telescope-file-browser.nvim'
+  use {
+	  'imNel/monorepo.nvim',
+	  -- or                            , branch = '0.1.x',
+	  requires = { {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope.nvim'}}
+  }
 
 
-  -- THEMES
-  -- Aquarium
+  -- THEMES & APPEARANCE
+  -- Themes
   --  use({
   --    'frenzyexists/aquarium-vim'
   --  })
-
-  -- tundra theme
-  -- use 'sam4llis/nvim-tundra'
-
-  -- catpuccin theme
+  --  use 'sam4llis/nvim-tundra'
   use { "catppuccin/nvim", name = "catppuccin" }
+  -- File Icons 
+  use 'nvim-tree/nvim-web-devicons'
 
   -- CODING
   use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
@@ -80,4 +90,6 @@ return require('packer').startup(function(use)
 
   -- java 
   use 'mfussenegger/nvim-jdtls'
+  use 'mfussenegger/nvim-dap'
+  use 'rcarriga/cmp-dap'
 end)
