@@ -3,7 +3,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Path 
 export ZSH="$HOME/.oh-my-zsh"
 export TMUX_CONFIG="~/.config/tmux/.tmux.conf"
-export JAVA_HOME=$(/usr/libexec/java_home)
+# export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/"
 export PATH=$PATH:$JAVA_HOME/bin
 
 # running and sourcing tmux automatically

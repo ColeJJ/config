@@ -18,7 +18,8 @@ local path_to_jar = path_to_plugins .. "org.eclipse.equinox.launcher_1.6.400.v20
 local lombok_path = jdtls_path .. "/lombok.jar"
 local jvm_path = '/Library/Java/JavaVirtualMachines'
 local jdk_20_path = jvm_path .. '/jdk-20.jdk'
--- local jdk_19_path = jvm_path .. '/jdk-19.jdk'
+local jdk_19_path = jvm_path .. '/jdk-19.jdk'
+local jdk_17_path= jvm_path .. '/jdk-17.jdk'
 
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
@@ -40,6 +41,7 @@ local workspace_dir = HOME .. "/ghq/java_workspaces/neovim_ws/"
 local on_attach = function(client, bufnr)
   -- java bindings
   jdtls.setup.add_commands()
+  jdtls.setup_dap({ hotcodereplace = 'auto' })
   local opts = { noremap=true, silent=true, buffer=bufnr }
       -- Java specific
       vim.keymap.set("n", "<leader>or", function() jdtls.organize_imports() end, opts)
@@ -48,6 +50,8 @@ local on_attach = function(client, bufnr)
       vim.keymap.set("n", "<leader>de", function() jdtls.extract_variable(true) end, opts)
       vim.keymap.set("n", "<leader>de", function() jdtls.extract_variable() end, opts)
       vim.keymap.set("n", "<leader>dm", function() jdtls.extract_method(true) end, opts)
+  -- debug maps 
+  require("colejj.debugmaps")
 end
 
 -- setting capabilities
@@ -92,11 +96,15 @@ local config = {
           {
             name = "JavaSE-20",
             path = jdk_20_path .. "/Contents/Home",
+          },
+          {
+            name = "JavaSE-19",
+            path = jdk_19_path .. "/Contents/Home",
+          },
+          {
+            name = "JavaSE-17",
+            path = jdk_17_path .. "/Contents/Home",
           }
-          -- {
-          --   name = "JAVASE-19",
-          --   path = jdk_19_path .. "/Contents/Home",
-          -- }
         }
       },
       import = {
@@ -185,7 +193,9 @@ local config = {
 local extendedClientCapabilities = require('jdtls').extendedClientCapabilities;
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true;
 config['init_options'] = {
-    bundles = {},
+    bundles = {
+        vim.fn.glob(HOME.. "/.config/java/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.45.0.jar", 1)
+    },
     extendedClientCapabilities = extendedClientCapabilities;
 }
 
