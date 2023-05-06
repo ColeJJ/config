@@ -35,6 +35,7 @@ return require('packer').startup(function(use)
   use { "catppuccin/nvim", name = "catppuccin" }
   -- File Icons 
   use 'nvim-tree/nvim-web-devicons'
+  use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
 
   -- CODING
   use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
