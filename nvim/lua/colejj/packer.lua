@@ -28,11 +28,10 @@ return require('packer').startup(function(use)
 
   -- THEMES & APPEARANCE
   -- Themes
-  --  use({
-  --    'frenzyexists/aquarium-vim'
-  --  })
-  --  use 'sam4llis/nvim-tundra'
+  use { 'frenzyexists/aquarium-vim' }
+  use { 'sam4llis/nvim-tundra' }
   use { "catppuccin/nvim", name = "catppuccin" }
+  use { "neanias/everforest-nvim" }
   -- File Icons 
   use 'nvim-tree/nvim-web-devicons'
   use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
