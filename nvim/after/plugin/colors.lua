@@ -1,56 +1,3 @@
--- tundra
--- require('nvim-tundra').setup({
---   transparent_background = true,
---   dim_inactive_windows = {
---     enabled = false,
---     color = nil,
---   },
---   sidebars = {
---     enabled = true,
---     color = nil,
---   },
---   editor = {
---     search = {},
---     substitute = {},
---   },
---   syntax = {
---     booleans = { bold = true, italic = true },
---     comments = { bold = true, italic = true },
---     conditionals = {},
---     constants = { bold = true },
---     fields = {},
---     functions = {},
---     keywords = {},
---     loops = {},
---     numbers = { bold = true },
---     operators = { bold = true },
---     punctuation = {},
---     strings = {},
---     types = { italic = true },
---   },
---   diagnostics = {
---     errors = {},
---     warnings = {},
---     information = {},
---     hints = {},
---   },
---   plugins = {
---     lsp = true,
---     treesitter = true,
---     telescope = true,
---     nvimtree = true,
---     cmp = true,
---     context = true,
---     dbui = true,
---     gitsigns = true,
---     neogit = true,
---   },
---   overwrite = {
---     colors = {},
---     highlights = {},
---   },
--- })
-
 -- catppuccin
 -- require("catppuccin").setup({
 --     flavour = "mocha", -- latte, frappe, macchiato, mocha
@@ -96,29 +43,46 @@
 -- })
 
 -- everforest
-require("everforest").setup({
-  -- Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
-  -- Default is "medium".
-  background = "medium",
+-- require("everforest").setup({
+--   -- Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
+--   -- Default is "medium".
+--   background = "hard",
+--
+--   -- How much of the background should be transparent. Options are 0, 1 or 2.
+--   -- Default is 0.
+--
+--   --
+--   -- 2 will have more UI components be transparent (e.g. status line
+--   -- background).
+--   transparent_background_level = 2,
+--   -- Whether italics should be used for keywords, builtin types and more.
+--   italics = false,
+--   -- Disable italic fonts for comments. Comments are in italics by default, set
+--   -- this to `true` to make them _not_ italic!
+--   disable_italic_comments = false,
+-- })
 
-  -- How much of the background should be transparent. Options are 0, 1 or 2.
-  -- Default is 0.
+-- nord 
+-- Example config in lua
+vim.g.nord_contrast = true
+vim.g.nord_borders = false
+vim.g.nord_disable_background = true 
+vim.g.nord_italic = false
+vim.g.nord_uniform_diff_background = true
+vim.g.nord_bold = false
+-- Load the colorscheme
+require('nord').set()
 
-  --
-  -- 2 will have more UI components be transparent (e.g. status line
-  -- background).
-  transparent_background_level = 2,
-  -- Whether italics should be used for keywords, builtin types and more.
-  italics = false,
-  -- Disable italic fonts for comments. Comments are in italics by default, set
-  -- this to `true` to make them _not_ italic!
-  disable_italic_comments = false,
-})
+--aquarium
+-- -- " On = 1 (default) | Off = 0
+-- vim.g.aqua_bold = 1
+-- -- " On = 1 | Off = 0 (default)
+-- vim.g.aqua_transparency = 0
+-- -- " options: "light", "dark"
+-- vim.g.aquarium_style="dark"
 
-
-function ColorMyPencils(color) 
-	color = color or "everforest"
-    vim.opt.background = 'dark'
+function ColorMyPencils(color)
+	color = color or "nord"
 	vim.cmd.colorscheme(color)
 end
 
