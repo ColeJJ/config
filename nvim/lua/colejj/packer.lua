@@ -28,10 +28,10 @@ return require('packer').startup(function(use)
 
   -- THEMES & APPEARANCE
   -- Themes
-  use { 'frenzyexists/aquarium-vim' }
   use { "catppuccin/nvim", name = "catppuccin" }
   use { "neanias/everforest-nvim" }
   use { 'shaunsingh/nord.nvim' }
+  use({ 'rose-pine/neovim', as = 'rose-pine' })
   -- File Icons 
   use 'nvim-tree/nvim-web-devicons'
   use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
@@ -96,4 +96,7 @@ return require('packer').startup(function(use)
   use "rcarriga/nvim-dap-ui"
   use "theHamsta/nvim-dap-virtual-text"
   use "nvim-telescope/telescope-dap.nvim"
+
+  -- vim be good
+  use 'ThePrimeagen/vim-be-good'
 end)
