@@ -6,7 +6,8 @@ lsp.ensure_installed({
 	'tsserver',
 	'eslint',
 	'lua_ls',
-    'intelephense'
+    'intelephense',
+    'gopls'
 })
 
 -- Fix undefined var 'vim'
@@ -15,6 +16,19 @@ lsp.configure('lua-language-server', {
         Lua = {
             diagnostics = {
                 globals = { 'vim' }
+            }
+        }
+    }
+})
+
+-- go config 
+lsp.configure('gopls', {
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    settings = {
+        gopls = {
+            usePlaceholders = true,
+            analyses = {
+                unusedparams = true
             }
         }
     }

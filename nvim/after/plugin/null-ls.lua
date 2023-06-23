@@ -30,3 +30,7 @@ null_ls.setup({
     end
   end,
 })
+
+-- formatter plugings -> put into the opts object
+-- local opts = {}
+-- return opts

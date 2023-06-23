@@ -96,7 +96,10 @@ return require('packer').startup(function(use)
   use "rcarriga/nvim-dap-ui"
   use "theHamsta/nvim-dap-virtual-text"
   use "nvim-telescope/telescope-dap.nvim"
-
+  use {
+    "leoluz/nvim-dap-go",
+    requires = {{"mfussenegger/nvim-dap"}}
+  }
   -- vim be good
   use 'ThePrimeagen/vim-be-good'
 end)

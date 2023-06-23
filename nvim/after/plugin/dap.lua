@@ -1,4 +1,6 @@
-local dap, dapui = require("dap"), require("dapui")
+local dap = require("dap")
+local dapui = require("dapui")
+local dapGo = require("dap-go")
 
 -- dab ui
 -- dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -30,6 +32,9 @@ dap.configurations.php = {
     -- }
   }
 }
+
+-- GO
+dapGo.setup()
 
 -- maps
 require("colejj.debugmaps")
