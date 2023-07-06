@@ -82,7 +82,7 @@ require('rose-pine').setup({
 	bold_vert_split = false,
 	dim_nc_background = false,
 	disable_background = true,
-	disable_float_background = false,
+	disable_float_background = true,
 	disable_italics = false,
 
 	--- @usage string hex value or named color from rosepinetheme.com/palette
@@ -120,14 +120,14 @@ require('rose-pine').setup({
 
 		-- Blend colours against the "base" background
 		CursorLine = { bg = 'foam', blend = 10 },
-		StatusLine = { fg = 'love', bg = 'love', blend = 10 },
+		StatusLine = { fg = 'rose', bg = 'rose', blend = 10 },
         -- transparent telescope
-        TelescopeBorder = { fg = "highlight_high", bg = "none" },
-		TelescopeNormal = { bg = "none" },
-		TelescopePromptNormal = { bg = "base" },
-		TelescopeResultsNormal = { fg = "subtle", bg = "none" },
-		TelescopeSelection = { fg = "text", bg = "base" },
-		TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
+  --       TelescopeBorder = { fg = "highlight_high", bg = "none" },
+		-- TelescopeNormal = { bg = "none" },
+		-- TelescopePromptNormal = { bg = "base" },
+		-- TelescopeResultsNormal = { fg = "subtle", bg = "none" },
+		-- TelescopeSelection = { fg = "text", bg = "base" },
+		-- TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
 	}
 })
 

@@ -10,7 +10,7 @@ scrolling:
     history: 10000
     multiplier: 10
 window:
-  opacity: 0.85 
+  opacity: 1 
   padding:
     x: 0
     y: 0
@@ -44,7 +44,10 @@ colors:
     # background: "#000015" # dark blue
     # background: "#001f17" # dark green
     # background: "#170a0a" # dark red
-    background: "#000000" # black 
+    # background: "#000000" # black 
+    background: "#0F111A" # vscode theme bg 
+    # background: "#211F33" # nvChad Code bg 
+    # background: "#1A182C" # nvChad Tree bg
     foreground: "0xD1D5DB"
 
   # Colors the cursor will use if `custom_cursor_colors` is true
