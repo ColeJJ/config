@@ -26,7 +26,8 @@ nvim_tree.setup({
     renderer = {
         add_trailing = false,
         root_folder_modifier = ":t",
-        highlight_opened_files = "icon",
+        -- "none", "icon", "all", "name"
+        highlight_opened_files = "none",
         -- These icons are visible when you install web-devicons
         indent_markers = {
             enable = false,
