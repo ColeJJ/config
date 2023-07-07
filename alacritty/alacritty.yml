@@ -35,7 +35,7 @@ font:
   bold_italic:
     family: "Hack Nerd Font Mono"
     style: Bold Italic
-  size: 16 
+  size: 19 
 
 colors:
   # Default colors
@@ -53,7 +53,7 @@ colors:
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
     text: "0x111827"
-    cursor: "0xD1D5DB"
+    cursor: "#FDDA0D"
 
   normal:
     black: "0x6B7280"
