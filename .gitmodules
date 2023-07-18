@@ -1,0 +1,6 @@
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/ColeJJ/nvim.git
+[submodule "tmix"]
+	path = tmix
+	url = https://github.com/ColeJJ/tmux.git
