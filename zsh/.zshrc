@@ -43,3 +43,8 @@ alias ll='exa -l -g --icons'
 alias pecoll='ll | peco'
 alias v='vim .'
 
+cl() {
+    cd "$1" && ls -la
+}
+
+
