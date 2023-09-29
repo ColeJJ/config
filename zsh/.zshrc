@@ -30,6 +30,7 @@ plugins=(
 # sourcing oh my zsh (afer settings plugins etc!)
 source $ZSH/oh-my-zsh.sh
 
+alias ls='ls -la'
 alias ga='git add'
 alias gaa='git add --all'
 alias gcm='git commit --message'
