@@ -76,7 +76,8 @@ colors:
     # background: "#001f17" # dark green
     # background: "#170a0a" # dark red
     # background: "#000000" # black 
-    background: "#0F111A" # vscode theme bg 
+    background: "#0D0E14" # vscode theme bg 
+    # background: "#0A0B0E" # vscode theme tree bg 
     # background: "#211F33" # nvChad Code bg 
     # background: "#1A182C" # nvChad Tree bg
     foreground: "0xD1D5DB"
