@@ -67,6 +67,9 @@ font:
     family: "FiraCode Nerd Font"
     style: Bold Italic
   size: 19 
+  offset:
+    x: 2 # letter spacing
+    y: 15 # line spacing
 
 colors:
   # Default colors
