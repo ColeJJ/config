@@ -16,8 +16,8 @@ export PATH=$PATH:$GOBIN
 tmux
 tmux source-file ~/.config/tmux/tmux.conf
 
-ZSH_THEME="agnoster"
-# ZSH_THEME="robbyrussell"
+# ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 
 plugins=(
   git
