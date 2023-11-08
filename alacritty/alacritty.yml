@@ -69,7 +69,7 @@ font:
   size: 19 
   offset:
     x: 2 # letter spacing
-    y: 15 # line spacing
+    y: 10 # line spacing
 
 colors:
   # Default colors
