@@ -68,8 +68,8 @@ font:
     style: Bold Italic
   size: 19 
   offset:
-    x: 2 # letter spacing
-    y: 10 # line spacing
+    x: 3 # letter spacing
+    y: 13 # line spacing
 
 colors:
   # Default colors
