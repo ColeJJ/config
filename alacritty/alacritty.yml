@@ -108,7 +108,10 @@ colors:
   cursor:
     text: "0x111827"
     # cursor: "#FDDA0D" # yellow
-    cursor: "#118a27" # yellow
+    # cursor: "#3EA264" # green 
+    cursor: "#286941" # dark green 
+    # cursor: "#FFAF87" # organge 
+
     
   normal:
     black: "0x6B7280"
