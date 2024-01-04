@@ -71,6 +71,25 @@ font:
     x: 3 # letter spacing
     y: 13 # line spacing
 
+  # JETBRAINS NERD FONT 
+  normal:
+    family: "JetBrainsMono Nerd Font"
+    style: Regular
+  bold:
+    family: "JetBrainsMono Nerd Font"
+    style: Bold
+  italic:
+    family: "JetBrainsMono Nerd Font"
+    style: Italic
+  bold_italic:
+    family: "JetBrainsMono Nerd Font"
+    style: Bold Italic
+  size: 17 
+  offset:
+    x: 0
+    y: 0
+
+
 colors:
   # Default colors
   primary:
@@ -88,8 +107,9 @@ colors:
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
     text: "0x111827"
-    cursor: "#FDDA0D"
-
+    # cursor: "#FDDA0D" # yellow
+    cursor: "#118a27" # yellow
+    
   normal:
     black: "0x6B7280"
     red: "0xFCA5A5"
