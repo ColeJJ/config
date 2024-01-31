@@ -43,6 +43,7 @@ alias gcd='find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} checkou
 alias ll='exa -l -g --icons'
 alias pecoll='ll | peco'
 alias v='vim .'
+alias git='lazygit'
 
 cl() {
     cd "$1" && ls -la
