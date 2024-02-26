@@ -3,7 +3,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Path 
 export ZSH="$HOME/.oh-my-zsh"
 export TMUX_CONFIG="~/.config/tmux/.tmux.conf"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-20.jdk/Contents/Home/"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/"
 export JAVAFX_SDK_HOME="/Library/Java/JavaVirtualMachines/javafx20/javafx-sdk-20.0.1/lib"
 export JAVA_JMODS_HOME="/Library/Java/JavaVirtualMachines/javafx20/javafx-jmods-20.0.1"
 export PATH=$PATH:$JAVA_HOME/bin
@@ -44,6 +44,9 @@ alias ll='exa -l -g --icons'
 alias pecoll='ll | peco'
 alias v='vim .'
 alias git='lazygit'
+
+# java
+alias runspring = 'mvn spring-boot:run'
 
 cl() {
     cd "$1" && ls -la
